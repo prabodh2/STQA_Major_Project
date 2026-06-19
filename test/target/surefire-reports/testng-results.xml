@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="7" passed="7" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2026-06-19T15:41:56.769Z" name="Cars24_E2E_Suite" finished-at="2026-06-19T15:42:37.081Z" duration-ms="40312">
+    <groups>
+    </groups>
+    <test started-at="2026-06-19T15:41:56.769Z" name="E2E_Tests" finished-at="2026-06-19T15:42:37.081Z" duration-ms="40312">
+      <class name="com.cars24.tests.SeleniumE2ETest">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:com.cars24.tests.SeleniumE2ETest@c8e4bb0]" started-at="2026-06-19T21:12:00 IST" name="setUp" finished-at="2026-06-19T21:12:09 IST" duration-ms="9693" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="testRegistration()[pri:1, instance:com.cars24.tests.SeleniumE2ETest@c8e4bb0]" started-at="2026-06-19T21:12:09 IST" name="testRegistration" finished-at="2026-06-19T21:12:11 IST" duration-ms="1688" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testRegistration -->
+        <test-method signature="testLogin()[pri:2, instance:com.cars24.tests.SeleniumE2ETest@c8e4bb0]" started-at="2026-06-19T21:12:11 IST" name="testLogin" finished-at="2026-06-19T21:12:12 IST" depends-on-methods="com.cars24.tests.SeleniumE2ETest.testRegistration" duration-ms="748" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testLogin -->
+        <test-method signature="testGetCars()[pri:3, instance:com.cars24.tests.SeleniumE2ETest@c8e4bb0]" started-at="2026-06-19T21:12:12 IST" name="testGetCars" finished-at="2026-06-19T21:12:12 IST" depends-on-methods="com.cars24.tests.SeleniumE2ETest.testLogin" duration-ms="655" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testGetCars -->
+        <test-method signature="testAddCar()[pri:4, instance:com.cars24.tests.SeleniumE2ETest@c8e4bb0]" started-at="2026-06-19T21:12:12 IST" name="testAddCar" finished-at="2026-06-19T21:12:15 IST" depends-on-methods="com.cars24.tests.SeleniumE2ETest.testLogin" duration-ms="2113" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testAddCar -->
+        <test-method signature="testEditCar()[pri:5, instance:com.cars24.tests.SeleniumE2ETest@c8e4bb0]" started-at="2026-06-19T21:12:15 IST" name="testEditCar" finished-at="2026-06-19T21:12:16 IST" depends-on-methods="com.cars24.tests.SeleniumE2ETest.testAddCar" duration-ms="1397" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testEditCar -->
+        <test-method signature="testDeleteCar()[pri:6, instance:com.cars24.tests.SeleniumE2ETest@c8e4bb0]" started-at="2026-06-19T21:12:16 IST" name="testDeleteCar" finished-at="2026-06-19T21:12:16 IST" depends-on-methods="com.cars24.tests.SeleniumE2ETest.testEditCar" duration-ms="132" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testDeleteCar -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:com.cars24.tests.SeleniumE2ETest@c8e4bb0]" started-at="2026-06-19T21:12:16 IST" name="tearDown" finished-at="2026-06-19T21:12:16 IST" duration-ms="103" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class>
+      <class name="Cypress_E2E_Tests">
+        <test-method signature="all_6_apis.cy.js" status="PASS" duration-ms="19926" name="Cypress_E2E_API_Flows" started-at="2026-06-19T15:42:17.155Z" finished-at="2026-06-19T15:42:37.081Z">
+        </test-method>
+      </class>
+    </test>
+  </suite>
+</testng-results>

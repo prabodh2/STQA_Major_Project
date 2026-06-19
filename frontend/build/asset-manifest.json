@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/static/css/main.765058d1.css",
+    "main.js": "/static/js/main.ecfb575e.js",
+    "static/js/787.cda612ba.chunk.js": "/static/js/787.cda612ba.chunk.js",
+    "static/media/header.png": "/static/media/header.cbcf18761205affa0910.png",
+    "static/media/CarTrade.svg": "/static/media/CarTrade.2aae0434c022a22fec4b6ec88d388544.svg",
+    "index.html": "/index.html",
+    "main.765058d1.css.map": "/static/css/main.765058d1.css.map",
+    "main.ecfb575e.js.map": "/static/js/main.ecfb575e.js.map",
+    "787.cda612ba.chunk.js.map": "/static/js/787.cda612ba.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.765058d1.css",
+    "static/js/main.ecfb575e.js"
+  ]
+}

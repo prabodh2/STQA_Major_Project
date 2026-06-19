@@ -1,0 +1,14 @@
+{
+  "name": "cars24-cypress-stqa",
+  "version": "1.0.0",
+  "description": "Cypress E2E tests for STQA",
+  "main": "cypress.config.js",
+  "scripts": {
+    "test": "cypress run --spec \"cypress/e2e/all_6_apis.cy.js\"",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run --spec \"cypress/e2e/all_6_apis.cy.js\""
+  },
+  "dependencies": {
+    "cypress": "^13.6.0"
+  }
+}
