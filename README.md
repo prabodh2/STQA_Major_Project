@@ -1,6 +1,6 @@
 # CARS_24
 
-This project is a MERN-based product management system with a React frontend, an Express/MongoDB backend, Selenium UI automation, Cypress end-to-end tests, and a JMeter HTTP test plan.
+This project is a MERN-based product management system clone for **CARS_24** with a React frontend, an Express/MongoDB backend, Selenium UI automation, Cypress end-to-end tests, and a JMeter HTTP test plan.
 
 ---
 
@@ -24,7 +24,7 @@ CARS_24/
 
 ## 4. Features
 
-- MERN-based Product Management system
+- MERN-based Car Sales & Inventory Management system
 - React frontend with routing and responsive UI layouts
 - Express/Mongoose backend with MongoDB connectivity
 - Integrated testing suites:
@@ -52,11 +52,12 @@ Backend reads MongoDB connection settings from environment variables.
 Create a backend `.env` file at `Backend/.env` with:
 
 ```env
-PORT=3000
-MONGODB_URI=mongodb://127.0.0.1:27017/pms_mern
+PORT=4000
+MONGO_URL=mongodb://127.0.0.1:27017/cars24_clone
+SECRET_KEY=attryb_cars24_jwt_secret_key_8x9y2z4w5v3u
 ```
 
-*Note: If `MONGODB_URI` is not set, the backend falls back to `mongodb://127.0.0.1:27017/pms_mern`.*
+*Note: If `MONGO_URL` is not set, the backend falls back to `mongodb://localhost:27017/cars24_clone`.*
 
 ### Developer Details
 - **Lead Developer:** Prabodh Badimi
@@ -76,45 +77,54 @@ cd Backend
 npm install
 npm run dev
 ```
-The backend starts on `http://localhost:3000` by default.
+The backend starts on `http://localhost:4000` by default.
 
-**Health check:**
+**Verify backend status:**
 ```http
-GET http://localhost:3000/health
+GET http://localhost:4000/user
 ```
 
 ### 3. Run the Frontend
 ```bash
 cd frontend
 npm install
-npm run dev
+npm run start
 ```
-The frontend runs on `http://localhost:5173` with Vite.
+The frontend runs on `http://localhost:3000` with React.
 
 ---
 
 ## Backend API Endpoints
 
-**Base URL:** `http://localhost:3000`
+**Base URL:** `http://localhost:4000`
 
 | Method | Endpoint | Description |
 | :--- | :--- | :--- |
-| **GET** | `/health` | Health check |
-| **GET** | `/products` | Get all products |
-| **GET** | `/products/:id` | Get a single product |
-| **POST** | `/products` | Create a product |
-| **PUT** | `/products/:id` | Update a product |
-| **DELETE** | `/products/:id` | Delete a product |
-| **GET** | `/products/stats` | Get product statistics |
+| **POST** | `/user/register` | Register new user or dealer |
+| **POST** | `/user/login` | Login user |
+| **POST** | `/user/dealer-login` | Login dealer |
+| **GET** | `/cars/public/cars` | Get all public cars catalog |
+| **GET** | `/cars/single-car/:id` | Get details of a single car |
+| **GET** | `/cars/dealer-cars` | Get inventory of the logged-in dealer |
+| **POST** | `/cars/add-car` | Add a new car to inventory |
+| **PATCH** | `/cars/edit-car/:id` | Edit details of an inventory car |
+| **DELETE** | `/cars/delete-car/:id` | Delete a car from inventory |
+| **GET** | `/oem/specs` | Get all OEM specifications |
+| **POST** | `/oem/post-specs` | Add new OEM specifications |
 
-**Example create payload:**
+**Example car creation payload:**
 ```json
 {
-  "name": "Laptop",
-  "price": 55000,
-  "quantity": 10,
-  "imageURL": "https://example.com/laptop.png",
-  "category": "Electronics"
+  "title": "Honda City 2021",
+  "description": "A beautiful sedan in pristine condition.",
+  "image": "https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&q=80&w=2070",
+  "price": 3100000,
+  "kmOnOdometer": 12000,
+  "majorScratches": "None",
+  "accidentsReported": 0,
+  "previousBuyers": 1,
+  "registrationPlace": "Mumbai",
+  "originalPaint": "Yes"
 }
 ```
 
@@ -124,12 +134,16 @@ The frontend runs on `http://localhost:5173` with Vite.
 
 | Route | Page |
 | :--- | :--- |
-| `/` | Products list |
-| `/products` | Products list |
-| `/create` | Create product |
-| `/show/:id` | View product details |
-| `/update/:id` | Update product |
-| `/stats` | Stats page |
+| `/` | Home / landing page |
+| `/login` | User login page |
+| `/register` | User/dealer registration page |
+| `/dealer-login` | Dealer login page |
+| `/dealers` | Dealer dashboard (OEM specs & inventory) |
+| `/users-car` | Public cars inventory list |
+| `/car/:id` | View single car details |
+| `/add-car` | Add new car to inventory |
+| `/dealer-cars` | View dealer's cars inventory |
+| `/edit-car/:id` | Edit car details |
 
 ---
 
@@ -137,18 +151,18 @@ The frontend runs on `http://localhost:5173` with Vite.
 
 Selenium tests live under `test/selenium-java` and are driven by TestNG.
 
-**Main suite file:**
+**Main test suite class:**
 ```text
-test/selenium-java/testng.xml
+com.cars24.tests.SeleniumE2ETest
 ```
 
 The suite runs these tests in order:
-1. Home page
-2. Stats page
-3. Add product
-4. Edit product
-5. View product
-6. Delete product
+1. User registration (`testRegistration`)
+2. Dealer login (`testLogin`)
+3. Get Cars dashboard catalog (`testGetCars`)
+4. Add car to inventory (`testAddCar`)
+5. Edit car details (`testEditCar`)
+6. Delete car (`testDeleteCar`)
 
 **Run Selenium tests:**
 ```bash
@@ -161,16 +175,11 @@ mvn test
 ## Cypress Tests
 
 The Cypress project is under `test/cypress` and is configured to use:
-- **baseUrl:** `http://localhost:5173`
+- **baseUrl:** `http://localhost:3000`
 - **spec pattern:** `cypress/e2e/**/*.cy.js`
 
 **Test files:**
-- `homePage.cy.js`
-- `statsPage.cy.js`
-- `showProduct.cy.js`
-- `addProduct.cy.js`
-- `editProduct.cy.js`
-- `deleteProduct.cy.js`
+- `all_6_apis.cy.js` (E2E master scenario test containing registration, login, get catalog, add, edit, and delete car)
 
 **Run Cypress from the Cypress project folder:**
 ```bash
@@ -189,18 +198,18 @@ npx cypress run --config-file test/cypress/cypress.config.js
 
 The JMeter HTTP test plan is located at:
 ```text
-test/jmeter/PMSHttpTest.jmx
+test/jmeter/all_6_apis.jmx
 ```
 
 It covers:
-- Home / all products request
-- Stats request
-- Add product request
-- Edit product request
-- View product request
-- Delete product request
+- User registration request
+- Dealer login request
+- Add car request
+- Edit car request
+- Delete car request
+- Get public cars request
 
-*Open the `.jmx` file in JMeter and run it against the backend on `http://localhost:3000`.*
+*Open the `.jmx` file in JMeter and run it against the backend on `http://localhost:4000`.*
 
 ---
 
@@ -209,7 +218,7 @@ It covers:
 1. Start MongoDB.
 2. Start the backend.
 3. Start the frontend.
-4. Open the app in the browser at `http://localhost:5173`.
+4. Open the app in the browser at `http://localhost:3000`.
 5. Run Selenium, Cypress, or JMeter tests from their respective folders as needed.
 
 ---
@@ -218,7 +227,7 @@ It covers:
 
 - The backend uses Express and Mongoose.
 - The frontend uses React Router for navigation.
-- Product detail pages, update pages, and stats pages are all routed in the frontend.
+- Car detail pages, update pages, and dealer dashboard pages are all routed in the frontend.
 - Cypress and Selenium are both used for browser-based verification.
 - JMeter is included for API-level load and functional testing.
 
