@@ -56,6 +56,7 @@ public class SeleniumE2ETest {
         
         wait.until(ExpectedConditions.urlContains("/login"));
         System.out.println("✅ Registration Successful: Redirected to /login");
+        takeScreenshot("step1_registration");
     }
 
     @Test(priority = 2, dependsOnMethods = {"testRegistration"})
@@ -72,6 +73,7 @@ public class SeleniumE2ETest {
         
         wait.until(ExpectedConditions.urlContains("/dealers"));
         System.out.println("✅ Login Successful: Redirected to /dealers dashboard");
+        takeScreenshot("step2_login");
     }
 
     @Test(priority = 3, dependsOnMethods = {"testLogin"})
@@ -82,6 +84,7 @@ public class SeleniumE2ETest {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".main .carImage")));
         List<WebElement> cars = driver.findElements(By.cssSelector(".main .carImage"));
         System.out.println("✅ Get Cars Successful: Found " + cars.size() + " cars on dashboard");
+        takeScreenshot("step3_get_cars");
         Assert.assertTrue(cars.size() > 0, "Cars should be present on the dashboard");
     }
 
@@ -167,6 +170,7 @@ public class SeleniumE2ETest {
 
         wait.until(ExpectedConditions.urlContains("/dealer-cars"));
         System.out.println("✅ Add Car Successful: Redirected to /dealer-cars");
+        takeScreenshot("step4_add_car");
     }
 
     @Test(priority = 5, dependsOnMethods = {"testAddCar"})
@@ -194,6 +198,7 @@ public class SeleniumE2ETest {
 
         wait.until(ExpectedConditions.urlContains("/dealer-cars"));
         System.out.println("✅ Edit Car Successful: Price updated and redirected to /dealer-cars");
+        takeScreenshot("step5_edit_car");
     }
 
     @Test(priority = 6, dependsOnMethods = {"testEditCar"})
@@ -211,12 +216,24 @@ public class SeleniumE2ETest {
 
         wait.until(ExpectedConditions.invisibilityOfElementLocated(targetCarTitleLocator));
         System.out.println("✅ Delete Car Successful: Car removed from inventory page.");
+        takeScreenshot("step6_delete_car");
     }
 
     @AfterClass
     public void tearDown() {
         if (driver != null) {
             driver.quit();
+        }
+    }
+
+    private void takeScreenshot(String name) {
+        try {
+            java.nio.file.Files.createDirectories(java.nio.file.Paths.get("target/screenshots"));
+            java.io.File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+            java.nio.file.Files.copy(srcFile.toPath(), java.nio.file.Paths.get("target/screenshots/" + name + ".png"), java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+            System.out.println("📸 Screenshot saved: target/screenshots/" + name + ".png");
+        } catch (Exception e) {
+            System.err.println("Failed to capture screenshot: " + e.getMessage());
         }
     }
 }

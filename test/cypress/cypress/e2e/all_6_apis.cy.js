@@ -19,6 +19,7 @@ describe("Cars_24 Master E2E Suite - All 6 APIs/Scenarios in One Session", () =>
 
     cy.get("button.register-button").click();
     cy.url().should("include", "/login");
+    cy.screenshot("step1_registration");
 
     // ----------------------------------------------------
     // Scenario 2: Dealer Login (/user/dealer-login)
@@ -29,6 +30,7 @@ describe("Cars_24 Master E2E Suite - All 6 APIs/Scenarios in One Session", () =>
     cy.get('input[name="password"]').type(password);
     cy.get('button[type="submit"]').click();
     cy.url().should("include", "/dealers");
+    cy.screenshot("step2_login");
 
     // ----------------------------------------------------
     // Scenario 3: Get Public Cars Catalog (/inventory/public/cars)
@@ -38,6 +40,7 @@ describe("Cars_24 Master E2E Suite - All 6 APIs/Scenarios in One Session", () =>
     cy.get("h2").contains("All Cars").should("be.visible");
     cy.get(".main").should("be.visible");
     cy.get(".main").find(".carImage").should("have.length.at.least", 1);
+    cy.screenshot("step3_get_cars");
 
     // ----------------------------------------------------
     // Scenario 4: Add Car to Inventory (/inventory/add-car)
@@ -89,6 +92,7 @@ describe("Cars_24 Master E2E Suite - All 6 APIs/Scenarios in One Session", () =>
     // Submit
     cy.get("button").contains("ADD").click();
     cy.url().should("include", "/dealer-cars");
+    cy.screenshot("step4_add_car");
 
     // ----------------------------------------------------
     // Scenario 5: Edit Car Details (/inventory/edit-car/:id)
@@ -116,6 +120,7 @@ describe("Cars_24 Master E2E Suite - All 6 APIs/Scenarios in One Session", () =>
     // Click submit
     cy.get('button[type="submit"]').click();
     cy.url().should("include", "/dealer-cars");
+    cy.screenshot("step5_edit_car");
 
     // ----------------------------------------------------
     // Scenario 6: Delete Car (/inventory/delete-car/:id)
@@ -136,5 +141,6 @@ describe("Cars_24 Master E2E Suite - All 6 APIs/Scenarios in One Session", () =>
 
     // Verify it is removed
     cy.contains("h3", carTitle).should("not.exist");
+    cy.screenshot("step6_delete_car");
   });
 });
