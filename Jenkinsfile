@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        MONGO_URL = 'mongodb://localhost:27017/cars24_clone'
+        MONGO_URL = 'mongodb://localhost:27017/cars24_clone'\n        PATH = "/opt/homebrew/bin:/usr/local/bin:${env.PATH}"
     }
 
     stages {
