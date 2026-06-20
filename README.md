@@ -249,3 +249,14 @@ It covers:
 
 ### 5. Selenium Execution Console Output
 ![Selenium Execution Console Output](docs/screenshots/5_selenium_console_output.png)
+
+---
+
+## JMeter Execution Dashboard
+
+### 1. JMeter Dashboard Overview
+![JMeter Dashboard Overview](docs/screenshots/6_jmeter_dashboard_top.png)
+
+### 2. JMeter Dashboard Statistics
+![JMeter Dashboard Statistics](docs/screenshots/7_jmeter_dashboard_statistics.png)
+
